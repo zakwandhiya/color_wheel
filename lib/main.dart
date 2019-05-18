@@ -29,6 +29,16 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  
+  List<Color> color = <Color>[
+    Colors.lightBlue[600],
+    Colors.indigoAccent,
+    Color(0xff651fff), //contoh color menggunakan hexadecimal
+    Colors.purpleAccent,
+    Colors.pinkAccent[400]
+  ];
+
+
   void _incrementCounter() {
     setState(() {
       if(_counter < 4){
@@ -41,36 +51,37 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    Color color;
-    switch(_counter){
-      case 0 : color = Colors.blue[300];
-      break;
-      case 1 : color = Colors.blue[400];
-      break;
-      case 2 : color = Colors.blue[500];
-      break;
-      case 3 : color = Colors.blue[600];
-      break;
-      default : color = Colors.blue[700];
-    }
 
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: color[_counter],
       ),
       body: Container(
         child :Center(
           child: Container(
             width: 400,
             height: 600,
-            child :GestureDetector(             //gestur detector => widget yg bisa menerima input gesture dari user
+            child :GestureDetector(           //gestur detector => widget yg bisa menerima input gesture dari user
               child: Card(                      
-                color: color,
+                color: color[_counter],
                 child: Center(
-                  child: Text(
-                    "Tap untuk merubah warna",
-                    style: TextStyle(color: Colors.white),
-                  ),
+                  child: 
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon( 
+                        Icons.touch_app,
+                        color : Colors.white,
+                        size: 56,
+                      ),
+                      SizedBox(height: 24,),
+                      Text(
+                        "Tap untuk merubah warna",
+                        style: TextStyle(color: Colors.white ,fontSize: 18),
+                      ),
+                    ],
+                  )
                 )
               ),
               onTap: _incrementCounter,         //onTap => salah satu contoh atribut yg dimiliki gestur detector
